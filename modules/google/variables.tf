@@ -15,13 +15,12 @@ variable "database_instance_tier" {
 }
 
 variable "packagecloud_token" {
-  default = ""
 }
 
 variable "crypto_key" {
   description = "The crypto key to decrypt blobs"
 }
-variable "target_bucket_id" {
+variable "target_bucket" {
   description = "The name of the bucket where blobs should be migrated to"
 }
 
@@ -37,4 +36,8 @@ variable "sql_dump_file_name" {
 
 variable "max_allowed_packet" {
   default = "131072"
+}
+
+variable "ssh_timeout" {
+  default = "300s"
 }

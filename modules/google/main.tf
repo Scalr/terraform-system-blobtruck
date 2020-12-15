@@ -17,7 +17,7 @@ resource "random_password" "password" {
 locals {
   ssh_user = "gce-blobtruck-user"
   ssh_port = 22
-  ssh_timeout = "300s"
+  ssh_timeout = var.ssh_timeout
   ssh_private_key = tls_private_key.ssh.private_key_pem
   ssh_public_key = tls_private_key.ssh.public_key_openssh
 
@@ -157,7 +157,7 @@ data "template_file" "blobtruck_yml" {
     db_pass = local.db_pass
     db_name = google_sql_database.database.name
     crypto_key = var.crypto_key
-    bucket_id = var.target_bucket_id
+    bucket_id = var.target_bucket
   }
 }
 

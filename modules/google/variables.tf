@@ -7,14 +7,18 @@ variable "zone" {
 }
 
 variable "machine_type" {
-  default = "f1-micro"
+  default = "n1-standard-2"
 }
 
 variable "database_instance_tier" {
-  default = "db-f1-micro"
+  default = "db-n1-standard-2"
 }
 
 variable "packagecloud_token" {
+}
+
+variable "packagecloud_repo" {
+  default = "scalr/scalr-server-ee"
 }
 
 variable "crypto_key" {
@@ -35,7 +39,8 @@ variable "sql_dump_file_name" {
 }
 
 variable "max_allowed_packet" {
-  default = "131072"
+  default = "134217728"
+  description = "The maximum size of one packet in bytes, defaults to 128Mb"
 }
 
 variable "ssh_timeout" {

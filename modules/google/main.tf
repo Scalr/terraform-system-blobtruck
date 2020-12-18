@@ -133,6 +133,11 @@ resource "google_compute_instance" "node" {
     local.node_firewall_tag
   ]
 
+  timeouts {
+    create = var.provisioning_timeout
+    update = var.provisioning_timeout
+  }
+
   depends_on = [
     google_storage_bucket_iam_binding.admins
   ]
@@ -161,7 +166,10 @@ resource "google_compute_instance" "node" {
 
   provisioner "remote-exec" {
     inline = [
-      "gcloud sql import sql ${google_sql_database_instance.mysql.name} ${local.dump_uri} --database=default --quiet",
+      "set -ex",
+      "url=`gcloud sql import sql ${google_sql_database_instance.mysql.name} ${local.dump_uri} --database=default --async --quiet`",
+      "operation=`echo $url | egrep '[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}' -o`",
+      "gcloud beta sql operations wait --project ${data.google_project.project.project_id}  $operation --quiet --timeout=${var.sql_import_wait_timeout}",
     ]
   }
 }

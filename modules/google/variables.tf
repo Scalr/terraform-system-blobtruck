@@ -46,3 +46,11 @@ variable "max_allowed_packet" {
 variable "ssh_timeout" {
   default = "300s"
 }
+
+variable "provisioning_timeout" {
+  default = "1h"
+}
+
+variable "sql_import_wait_timeout" {
+  default = 3600
+}

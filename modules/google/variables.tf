@@ -54,3 +54,8 @@ variable "provisioning_timeout" {
 variable "sql_import_wait_timeout" {
   default = 3600
 }
+
+variable extra_labels {
+  type        = map
+  default     = {}
+}

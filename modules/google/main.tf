@@ -138,6 +138,8 @@ resource "google_compute_instance" "node" {
     update = var.provisioning_timeout
   }
 
+  labels = var.extra_labels
+
   depends_on = [
     google_storage_bucket_iam_binding.admins
   ]
